@@ -16,19 +16,21 @@
 	}
 	
 	function printpreview(){
+	
 		$(".checkboxes").each(function(){
 			if($(this).attr('checked')){
-				itinerary.push("<tr><td>Booth #" $(this).attr('value') + "</td><td>" + $(this).attr('name') + "</td></tr>");
+				itinerary.push("<tr><td>Booth #" + $(this).attr('value') + "</td><td>" + $(this).attr('name') + "</td></tr>");
 			}
 		}); 
 		
 		var arayString = itinerary.toString();
+		var noCommas = arayString.replace(/,/g, '');
 		
-		//console.log(arayString);
+		//console.log(noCommas);
 		
-		for (var i=0;i==itinerary.length;i++){
-			document.write("<table><tr><td>" + itinerary[i].toString() + "</td></tr></table>");
-		}
+		//for (var i=0;i==itinerary.length;i++){
+		document.write("<table>" + noCommas + "</table>" + "<br /><button onclick='printpage()'>Print</button>");
+		//}
 		
 		//var strings = "<p>This is a paragraph of text that I am hoping will come out as a sentence when print is clicked</p><p>Here is another paragraph to see if there is any styling</p><button onclick='printpage()'>Print</button>"
 		
