@@ -42,12 +42,3 @@ function emailMe(){
 	alert('stop');
 	//parent.location="mailto:you@youremail.com?subject=The subject you want to appear";
 }
-	
-	function backOne(){
-		
-	}
-	
-
-	function echoArray(){
-		
-	}
