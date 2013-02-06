@@ -2,48 +2,55 @@
 	
 	var itinerary = new Array();
 
-	function printpagess(){
-		
-		
-		var arayString = itinerary.toString();
-		
-		console.log(arayString);
-		
-		//work on this block to eliminate array items if deselected after the print button is clicked.
-		if(itinerary != []){
-			//var itinerary = [];
-		}
-	}
-	
 	function printpreview(){
 	
 		$(".checkboxes").each(function(){
+			
 			if($(this).attr('checked')){
-				itinerary.push("<tr><td>Booth #" + $(this).attr('value') + "</td><td>" + $(this).attr('name') + "</td></tr>");
+				// last bit of the string below doesnt push the description :(
+				itinerary.push("<tr><td>Booth #" + $(this).attr('value') + "</td><td>" + $(this).attr('name') + "</td><td>" + $(this).closest('.exhib_bio').text() + "</td></tr>");
 			}
 		}); 
 		
 		var arayString = itinerary.toString();
 		var noCommas = arayString.replace(/,/g, '');
 		
-		//console.log(noCommas);
+		//console.log();
 		
-		//for (var i=0;i==itinerary.length;i++){
-		document.write("<table>" + noCommas + "</table>" + "<br /><button onclick='printpage()'>Print</button>");
-		//}
+		var printContent = "<table align='center'><tr><td><h3>Your personalised Itinerary:</h3></td></tr>" + noCommas + "<tr><td><button onclick='printpage()'>Print</button><button onclick='backOne()'>Back to Exhibitor List</button></td></tr></table>"
 		
-		//var strings = "<p>This is a paragraph of text that I am hoping will come out as a sentence when print is clicked</p><p>Here is another paragraph to see if there is any styling</p><button onclick='printpage()'>Print</button>"
+		document.write(printContent);
 		
-		//document.write(strings);
 		
-		//window.print();
+		
+		
 	}
 	
 	function printpage(){
 		window.print();
 	}
 	
+	function backOne(){
+		location.reload();
+	}
+	
 
-function echoArray(){
-	console.log(arayString);
-}
+	function echoArray(){
+		w=window.open();
+		w.document.write($('#location').html());
+		w.print();
+		w.close();
+	}
+
+/* TO DO!!!!!!
+ * 
+ * So did a bit of cross browser on this..
+ * firefox and opera dont like the buttons after the document.write but my guess is this is because these functions should exist after document.write? I think chrome just magically carries them over...
+ * Internet explorer 9 doesnt even do the document.write altho 8 and 7 do but again, dont like the buttons afterwards
+ * I think I should probably just not do document.write
+ * do the thing where you create a div and then keep it hidden but only print out that section
+ * 
+ * ---
+ * 
+ * Also figure out how to get the booth description added to the freeking array!
+ */
