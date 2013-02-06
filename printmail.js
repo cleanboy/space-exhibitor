@@ -3,25 +3,29 @@
 	var itinerary = new Array();
 
 	function printpreview(){
-	
+		
+		//
 		$(".checkboxes").each(function(){
-			
 			if($(this).attr('checked')){
 				// last bit of the string below doesnt push the description :(
-				itinerary.push("<tr><td>Booth #" + $(this).attr('value') + "</td><td>" + $(this).attr('name') + "</td><td>" + $(this).closest('.exhib_bio').text() + "</td></tr>");
+				itinerary.push("<tr><td>Booth #" + $(this).attr('value') + "</td><td>" + $(this).attr('name') + "</td><td>" + $(this).attr('bio') + "</td></tr>");
 			}
 		}); 
 		
 		var arayString = itinerary.toString();
 		var noCommas = arayString.replace(/,/g, '');
 		
-		//console.log();
+		var printContent = "<table align='center'><tr><td colspan='3' align='center'><h3>Your personalised Itinerary:</h3></td></tr>" + noCommas + "<tr><td></table>"
 		
-		var printContent = "<table align='center'><tr><td><h3>Your personalised Itinerary:</h3></td></tr>" + noCommas + "<tr><td><button onclick='printpage()'>Print</button><button onclick='backOne()'>Back to Exhibitor List</button></td></tr></table>"
+		$('body').prepend("<div id='printme' style='display:none'>" + printContent + "</div>");
 		
-		document.write(printContent);
+		w=window.open();
+		w.document.write($('#printme').html());
+		w.print();
+		w.close();
+		//location.reload();
 		
-		
+		itinerary = [];
 		
 		
 	}
@@ -31,15 +35,12 @@
 	}
 	
 	function backOne(){
-		location.reload();
+		
 	}
 	
 
 	function echoArray(){
-		w=window.open();
-		w.document.write($('#location').html());
-		w.print();
-		w.close();
+		
 	}
 
 /* TO DO!!!!!!
