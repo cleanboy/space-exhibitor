@@ -1,7 +1,6 @@
 var itinerary = new Array();
 
-function printpreview(){
-	
+function getInfo(){
 	$(".checkboxes").each(function(){
 		//get relevant information and push to array
 		if($(this).attr('checked')){
@@ -14,6 +13,11 @@ function printpreview(){
 	var noCommas = arayString.replace(/,/g, '');
 	
 	var printContent = "<table align='center'><tr><td colspan='3' align='center'><h3>Your personalised Itinerary:</h3></td></tr>" + noCommas + "<tr><td></table>"
+	return printContent;
+}
+
+function printpreview(){
+	var printContent = getInfo();
 	
 	//create hidden div within the current document with content ready for print
 	$('body').prepend("<div id='printme' style='display:none'>" + printContent + "</div>");
@@ -28,9 +32,11 @@ function printpreview(){
 	itinerary = [];
 }
 	
-	function printpage(){
-		window.print();
-	}
+function emailMe(){
+	var emailContent = getInfo();
+	
+	
+}
 	
 	function backOne(){
 		
